@@ -29,7 +29,7 @@ public class primer_panel_admin extends JFrame {
         btnAgregarUsuario.setBounds(50, 20, 200, 30); 
         add(btnAgregarUsuario);
 
-        JLabel lblagregarusuario = new JLabel("Crea un nuevo usuario y agrégalo a la base de datos");
+        JLabel lblagregarusuario = new JLabel("Crea un nuevo usuario");
         lblagregarusuario.setBounds(270, 20, 300, 30); 
         add(lblagregarusuario);
         //Accion del boton

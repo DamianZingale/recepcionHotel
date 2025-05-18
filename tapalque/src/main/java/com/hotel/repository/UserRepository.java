@@ -10,6 +10,7 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.hotel.model.PrecioHora;
@@ -21,14 +22,15 @@ import com.hotel.model.Usuario;
 
 public class UserRepository {
     
-    private ConnectionRepository cn = new ConnectionRepository();
-   
     
-   
+    private ConnectionRepository cn;  
     
-    public UserRepository(){
-        
+    public UserRepository() {
+        cn = new ConnectionRepository();
     }
+
+    
+    
     
     public void crearusuario(Usuario us) {
         String sql = "INSERT INTO Usuario (nombre, apellido, documento, telefono, nombre_usuario, password, rol) VALUES (?, ?, ?, ?, ?, ?, ?)";       
