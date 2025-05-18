@@ -3,6 +3,8 @@ package com.hotel.View;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 
 import javax.swing.JButton;
@@ -19,11 +21,6 @@ public class Principal extends JFrame {
     private JTextField textField1;
     
     
-
-    /*public static void main(String[] args) {
-        // Crear la ventana principal
-        new Principal();
-    }*/
 
     public Principal() {
         setSize(400,300);
@@ -59,10 +56,11 @@ public class Principal extends JFrame {
             passwordField.setFont(new Font("Arial", Font.PLAIN, 14));
             passwordField.setBounds(100, 150, 200, 30);
             add(passwordField);
-
+            
             // Botón de "ver contraseña"
             JButton btnVerContraseña = new JButton("🔍"); 
             btnVerContraseña.setBounds(320, 140, 50, 50); 
+            btnVerContraseña.setFocusable(false); // Desactivar el foco del botón
             add(btnVerContraseña);
 
                
@@ -71,6 +69,16 @@ public class Principal extends JFrame {
             btnIngresar.setFont(new Font("Arial", Font.PLAIN, 14)); 
             btnIngresar.setBounds(150, 200, 100, 30); 
             add(btnIngresar);
+            
+        passwordField.addKeyListener(new KeyAdapter() {
+             @Override
+            public void keyPressed(KeyEvent e) {
+            if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+            btnIngresar.doClick(); // Simula que se clickeó el botón
+                    }
+                }
+            });
+
         
         btnVerContraseña.addActionListener(new ActionListener() {
             private boolean mostrandoContraseña = false;
@@ -87,23 +95,30 @@ public class Principal extends JFrame {
                 }
             });
 
+        
+
         btnIngresar.addActionListener(new ActionListener() {
             
             public void actionPerformed(ActionEvent e){
                
                 String usuario = textField1.getText();
                 String contraseña = new String(passwordField.getPassword());
-               
+                if(usuario.isEmpty() || contraseña.isEmpty()){
+                    JOptionPane.showMessageDialog(btnIngresar, "Por favor complete todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
                 LogicaUsuario log = new LogicaUsuario();
-                boolean confirmacion = false;
+                boolean adminConfirmacion = false;
+                boolean userConfirmacion = false;
                 try {
-                    confirmacion = log.EsAdmin(usuario, contraseña);
+                    adminConfirmacion = log.EsAdmin(usuario, contraseña);
+                    userConfirmacion = log.esUser(usuario, contraseña);
                 } catch (SQLException e1) {
                    
                     e1.printStackTrace();
                 }
 
-                if(!confirmacion){
+                if(!adminConfirmacion){
                     JOptionPane.showMessageDialog(btnIngresar, "Imposible acceder, intente nuevamente", contraseña, DISPOSE_ON_CLOSE);
 
                 }else{
@@ -113,6 +128,16 @@ public class Principal extends JFrame {
                     dispose(); 
            
                 }
+                if(!userConfirmacion){
+                    JOptionPane.showMessageDialog(btnIngresar, "Imposible acceder, intente nuevamente", contraseña, DISPOSE_ON_CLOSE);
+                }else{
+                    primer_panel_user ventanaUser = new primer_panel_user();
+                    ventanaUser.setVisible(true);  
+
+                    dispose(); 
+                }
+                
+                   
 
 
             }

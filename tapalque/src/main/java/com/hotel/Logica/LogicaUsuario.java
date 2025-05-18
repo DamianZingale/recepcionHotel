@@ -1,11 +1,8 @@
 package com.hotel.Logica;
 
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-
 import org.springframework.stereotype.Service;
 import com.hotel.model.PrecioHora;
 import com.hotel.model.Usuario;
@@ -27,6 +24,18 @@ public class LogicaUsuario {
         if (user != null) {
             String pass = user.getPassword();
             if (pass.equals(contraseña)&& user.getRol().equals("Administrador")) { 
+                es = true;
+            }
+        }
+        return es;
+    }
+    public boolean esUser(String usuario, String contraseña) throws SQLException {
+        boolean es = false;
+        Usuario user = new Usuario();
+        user = repo.traerUsuario(usuario);
+        if (user != null) {
+            String pass = user.getPassword();
+            if (pass.equals(contraseña)&& user.getRol().equals("Usuario")) { 
                 es = true;
             }
         }

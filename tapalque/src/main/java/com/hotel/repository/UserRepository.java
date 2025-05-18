@@ -9,10 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JOptionPane;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import com.hotel.model.PrecioHora;
 import com.hotel.model.Usuario;
 
