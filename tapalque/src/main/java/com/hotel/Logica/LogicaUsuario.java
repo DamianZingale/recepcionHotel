@@ -4,7 +4,7 @@ package com.hotel.Logica;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+
 
 import org.springframework.stereotype.Service;
 import com.hotel.model.PrecioHora;
@@ -58,16 +58,21 @@ public class LogicaUsuario {
         repo.grabarHora(hr);
     }
 
-    public Optional<Usuario> user_for_all(String DNI) {
-    try {
-        // Intentamos traer el usuario por el DNI
-        Usuario usuario = (Usuario) repo.traerUsuarioPorDNI(DNI);
-        return Optional.ofNullable(usuario);
-    } catch (SQLException e) {
-        e.printStackTrace();
-        return Optional.empty();  // En caso de error, devolvemos un Optional vacío
+    public Usuario user_for_all(String DNI) {
+        Usuario user = null;  // Inicializar antes del bloque try
+    
+        try {
+            // Intentamos traer el usuario por el DNI
+            user = repo.traerUsuarioPorDNI(DNI);
+        } catch (SQLException e) {
+            // Si ocurre una SQLException, se captura y se imprime el error
+            e.printStackTrace();
+            user = null;  // Si hay un error, asignamos null al usuario
+        } 
+           
+            return user;
+        
     }
-}
     public void modificar(Usuario user, int id){
         
         try{
