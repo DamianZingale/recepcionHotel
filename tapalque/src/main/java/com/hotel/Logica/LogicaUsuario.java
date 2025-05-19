@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import com.hotel.model.PrecioHora;
+import com.hotel.model.SessionUsuario;
 import com.hotel.model.Usuario;
 import com.hotel.repository.UserRepository;
 
@@ -36,8 +37,11 @@ public class LogicaUsuario {
         if (user != null) {
             String pass = user.getPassword();
             if (pass.equals(contraseña)&& user.getRol().equals("Usuario")) { 
+
+                SessionUsuario session = new SessionUsuario(user);
                 es = true;
             }
+
         }
         return es;
     }
@@ -91,4 +95,6 @@ public class LogicaUsuario {
             e.printStackTrace();
         }
     }
+
+    
 }

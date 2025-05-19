@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.JOptionPane;
 import org.springframework.stereotype.Repository;
 import com.hotel.model.PrecioHora;
@@ -17,7 +16,7 @@ import com.hotel.model.Usuario;
 
 @Repository
 
-public class UserRepository {
+public class UserRepository implements I_UserRepository {
     
     
     private ConnectionRepository cn;  
@@ -209,8 +208,62 @@ public class UserRepository {
             return usuario;
         }    
 
+        public void guardarTiempo(String tiempo) {
+            String sql = "INSERT INTO Tiempo (tiempo) VALUES (?)";
+            Connection conn = cn.conexion();
+            PreparedStatement st = null;
+            try {
+                st = conn.prepareStatement(sql);
+                if(st != null){
+                    st.setString(1, tiempo);
+                    int rowsInserted = st.executeUpdate();
+                    if (rowsInserted > 0) {
+                        System.out.println("Tiempo guardado exitosamente.");
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                System.out.println("Error al intentar guardar tiempo");
+            }
+            finally {
+                try {
+                    if (st != null) st.close();
+                    if (conn != null) conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            
+        }
 
 
+
+
+        public void eliminarUsuario(int id) {
+            String sql = "DELETE FROM Usuario WHERE id_usuario = ?";
+            Connection conn = cn.conexion();
+            PreparedStatement st = null;
+            try {
+                st = conn.prepareStatement(sql);
+                if(st != null){
+                    st.setInt(1, id);
+                    int rowsDeleted = st.executeUpdate();
+                    if (rowsDeleted > 0) {
+                        System.out.println("Usuario eliminado exitosamente.");
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                System.out.println("Error al intentar eliminar usuario");
+            } finally {
+                try {
+                    if (st != null) st.close();
+                    if (conn != null) conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
 }     
             
       

@@ -1,14 +1,25 @@
 package com.hotel.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.sql.SQLException;
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
+import com.hotel.model.PrecioHora;
 import com.hotel.model.Usuario;
 @Repository
-public interface I_UserRepository extends JpaRepository <Usuario, Integer>{
-    Usuario findByNombre_Usuario(String userName);
-    /*boolean existsByNombre_Usuario(String nombre_usuario);
-    boolean existsByPassword(String password);
-    boolean existsByRol(String s);*/
+public interface I_UserRepository {
     
+    void crearusuario(Usuario us);
+    Usuario traerUsuario(String userName)throws SQLException;
+    List<Double> selectHora();
+    void grabarHora(PrecioHora hr);
+    Usuario traerUsuarioPorDNI(String DNI) throws SQLException;
+    Usuario modificar_usuario(Usuario us, int id) throws SQLException;
+    void guardarTiempo(String tiempo);
+    void eliminarUsuario(int id);
+
+    
+   
 }
