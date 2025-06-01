@@ -118,32 +118,24 @@ public class Principal extends JFrame {
                     e1.printStackTrace();
                 }
 
-                if(!adminConfirmacion){
+                if(!adminConfirmacion&&!userConfirmacion){
                     JOptionPane.showMessageDialog(btnIngresar, "Imposible acceder, intente nuevamente", contraseña, DISPOSE_ON_CLOSE);
-
-                }else{
-                    primer_panel_admin ventanaAdmin = new primer_panel_admin();
-                    ventanaAdmin.setVisible(true);  
-
-                    dispose(); 
-           
                 }
-                if(!userConfirmacion){
-                    JOptionPane.showMessageDialog(btnIngresar, "Imposible acceder, intente nuevamente", contraseña, DISPOSE_ON_CLOSE);
-                }else{
-                    primer_panel_user ventanaUser = new primer_panel_user();
-                    ventanaUser.setVisible(true);  
+                else{
 
-                    dispose(); 
+                    if(adminConfirmacion){
+                        primer_panel_admin ventanaAdmin = new primer_panel_admin();
+                        ventanaAdmin.setVisible(true);  
+                        dispose(); 
+                    }
+                    else{
+                        primer_panel_user ventanaUser = new primer_panel_user();
+                        ventanaUser.setVisible(true);  
+                        dispose(); 
+                    }
                 }
-                
-                   
-
-
             }
-        });
-       
-            
+        }); 
         }
     }
 }

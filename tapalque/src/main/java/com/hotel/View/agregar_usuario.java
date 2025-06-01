@@ -1,5 +1,7 @@
 package com.hotel.View;
 
+import java.sql.SQLException;
+
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -72,7 +74,11 @@ public class agregar_usuario extends JFrame{
                     rol = ckRecep.getText();
                 }
                 LogicaUsuario us = new LogicaUsuario();
-                us.crearUsuario(txtNombre.getText(), txtApqllido.getText(),txtDocumento.getText(),txtTelefono.getText(),rol);
+                try {
+                    us.crearUsuario(txtNombre.getText(), txtApqllido.getText(),txtDocumento.getText(),txtTelefono.getText(),rol);
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
                 dispose();
             });
         }
