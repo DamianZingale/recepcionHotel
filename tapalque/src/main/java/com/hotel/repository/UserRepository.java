@@ -37,6 +37,7 @@ public class UserRepository implements I_UserRepository {
                 st.setString(4, us.getTelefono());
                 st.setString(5, us.getNombre_usuario());
                 st.setString(6, us.getPassword());
+                st.setString(7, us.getRol());
                 int rowsInserted = st.executeUpdate();
                 if (rowsInserted > 0) {
 
