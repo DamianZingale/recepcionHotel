@@ -55,18 +55,27 @@ public class Usuario {
 
    
     
-    public Usuario(String nombre, String apellido, String documento, String telefono,String rol) {
+    public Usuario(String nombre, String apellido, String documento, String telefono, String nombreUsuario, String rol) {
 		
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.documento = documento;
 		this.telefono = telefono;
-		this.nombre_usuario = nombre.toLowerCase() + "." + apellido.toLowerCase();
+		this.nombre_usuario = nombreUsuario;
 		this.password = documento + "." + "hotel";
 		this.rol = rol;
      
 	}
-    
+  public Usuario(String nombre, String apellido, String documento, String telefono, String rol) {
+		
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.documento = documento;
+		this.telefono = telefono;
+		this.nombre_usuario = null;
+		this.password = documento + "." + "hotel";
+		this.rol = rol;
+	}
     
     
    

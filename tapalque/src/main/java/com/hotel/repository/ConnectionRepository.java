@@ -12,23 +12,19 @@ public class ConnectionRepository {
 
     public ConnectionRepository(){}
     
-    public Connection conexion(){
-        if(cn == null){
-        try {
-                
+    public Connection conexion() {
+    try {
+        if (cn == null || cn.isClosed()) {
             cn = DriverManager.getConnection(URL);
             System.out.println("Conexión a SQLite establecida.");
-            
-            // Establecer la conexión
-        } catch (SQLException e) {
-            System.err.println("Error: No se puede conectar a la base de datos.");
-            e.printStackTrace();
-            cn = null;
         }
+    } catch (SQLException e) {
+        System.err.println("Error: No se puede conectar a la base de datos.");
+        e.printStackTrace();
+        cn = null;
     }
-        return cn;
-    }
-
+    return cn;
+}
     
 
     // Método para cerrar la conexión
