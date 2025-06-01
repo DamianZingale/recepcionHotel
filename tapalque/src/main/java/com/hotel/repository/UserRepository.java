@@ -90,22 +90,25 @@ public class UserRepository implements I_UserRepository {
     public int contarUsuariosConNombreYApellido(String nombre, String apellido) {
         int cantidad = 0;
         String sql = "SELECT COUNT(*) FROM Usuario WHERE nombre = ? AND apellido = ?";
-        Connection conn = cn.conexion();
+       
 
-        try (PreparedStatement st = conn.prepareStatement(sql)) {
+        try (Connection conn = cn.conexion() ; //colocamos la conexion en el try para que el mismo bloque la cierre al terminar
+             PreparedStatement st = conn.prepareStatement(sql)) {
+            
             st.setString(1, nombre);
             st.setString(2, apellido);
-
-            try (ResultSet rs = st.executeQuery()) {
-                if (rs.next()) {
+            
+            try (ResultSet rs = st.executeQuery() ){
+            if (rs.next()) {
                     cantidad = rs.getInt(1); // cantidad de usuarios encontrados
                 }
             }
+            
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Error al contar usuarios con mismo nombre y apellido");
         }
-
+        // si la conexion a bd no estuviese en el try, habria que cerrar la conexion aca con cn.cerrarConexion();
         return cantidad;
     }
 
