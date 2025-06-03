@@ -103,4 +103,13 @@ public class LogicaUsuario {
         }
     }
 
+    public void eliminar(int id_usuario) {
+        try{
+            repo.eliminarUsuario(id_usuario);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
 }
