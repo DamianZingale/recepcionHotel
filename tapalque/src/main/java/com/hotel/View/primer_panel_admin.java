@@ -84,10 +84,14 @@ public class primer_panel_admin extends JFrame {
         JButton btnEliminarUsuario = new JButton("Eliminar usuario");
         btnEliminarUsuario.setBounds(50, 270, 200, 30);
         add(btnEliminarUsuario);
-
         JLabel lblEliminarUsuario = new JLabel("Elimina un usuario (permanente)");
         lblEliminarUsuario.setBounds(270, 270, 300, 30);
         add(lblEliminarUsuario);
+        //Accion del boton
+        btnEliminarUsuario.addActionListener(e->{
+            delete_user delete = new delete_user();
+            delete.setVisible(true);
+        });
 
         // Botón y etiqueta "Establecer precio"
         JButton btnPrecioHora= new JButton("Establecer precio");
