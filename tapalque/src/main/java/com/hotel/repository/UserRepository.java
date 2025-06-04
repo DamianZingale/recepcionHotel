@@ -170,7 +170,7 @@ public class UserRepository implements I_UserRepository {
     public Usuario traerUsuarioPorDNI(String DNI) throws SQLException {
 
         String sql = "SELECT * FROM Usuario WHERE documento = ?";
-        Usuario usuario = new Usuario();
+        Usuario usuario = null; //La cambie a null porque si no encuentra me retornaba un usuario vacio y no null(Santi)
         Connection conn = cn.conexion();
         PreparedStatement st = conn.prepareStatement(sql);
         try {
